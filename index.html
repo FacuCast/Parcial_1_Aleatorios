@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aleatorios - Parciales</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 48px;
+            color: #2E2E2E;
+            text-shadow: 2px 2px 5px #ccc;
+        }
+        /* Estilos para los grupos */
+        #orden {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+        }
+        .div {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 2px 2px 5px #ccc;
+            width: 45%;
+            margin-bottom: 20px;
+            padding: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        h2 {
+            margin-top: 0;
+            font-size: 24px;
+            color: #2E2E2E;
+            text-shadow: 2px 2px 5px #ccc;
+        }
+        /* Estilos para las animaciones */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .div:nth-child(odd) {
+            animation: fadeIn 0.5s ease;
+        }
+        .div:nth-child(even) {
+            animation: fadeIn 0.5s ease 0.3s;
+        }
+        @media screen and (max-width: 768px) {
+            .div {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Grupos para el Parcial!</h1>
+    <div id="orden">
+    </div>
+    <script>
+        var lista = [
+            'Agustin Bracamonte',
+            'Axel Ariel Godoy',
+            'Belen Zamparo',
+            'Cristian Escalante',
+            'Elias Gabriel Vadillo',
+            'Engel Tomas',
+            'Erica Murua',
+            'Ian Ferreira',
+            'Ivan Ezequiel Rodriguez',
+            'José Oscar Rodriguez',
+            'Leo Molina',
+            'Mara Celeste Schneider',
+            'Mateo Camps',
+            'Miguel Mattos',
+            'Morgan Diego José',
+            'Perez Cinthia Eliana',
+            'Rodolfo Lynch',
+            'sanchez monzon juan ignacio',
+            'Tomas Corazzini',
+            'Valdez Nicolas',
+            'Valentin Pierluigi',
+            'Vera Rodolfo Aníbal'
+        ];
+
+
+        document.getElementById('orden').innerHTML = '';
+        console.log(lista.length);
+        for (let index = 0; index < (lista.length / 2); index++) {
+            let numeroAleatorio1 = Math.floor(Math.random() * lista.length);
+            while (lista[numeroAleatorio1] == 'NULLS') {
+                numeroAleatorio1 = Math.floor(Math.random() * lista.length);
+                console.log(numeroAleatorio1);
+            }
+            let numeroAleatorio = Math.floor(Math.random() * lista.length);
+            while (lista[numeroAleatorio] == 'NULLS') {
+                numeroAleatorio = Math.floor(Math.random() * lista.length);
+                console.log(numeroAleatorio);
+            }
+
+            const newElement = document.createElement('div');
+            newElement.classList.add('div');
+            newElement.id = 'page';
+            newElement.innerHTML = `<h2>Grupo: ${lista[numeroAleatorio]} Y ${lista[numeroAleatorio1]}</h2>`;
+            document.querySelector('#orden').appendChild(newElement);
+            lista[numeroAleatorio] = 'NULLS';
+            lista[numeroAleatorio1] = 'NULLS';
+        }
+    </script>
+</body>
+
+</html>
