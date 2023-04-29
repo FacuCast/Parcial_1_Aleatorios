@@ -176,30 +176,32 @@
                 gruposAnteriores[i].remove();
             }
 
-            console.log(lista.length);
+            //console.log(lista.length);
             for (let index = 0; index < (seleccionados.length / 2); index++) {
                 let numeroAleatorio1 = Math.floor(Math.random() * seleccionados.length);
                 while (seleccionados[numeroAleatorio1] == 'NULLS') {
                     numeroAleatorio1 = Math.floor(Math.random() * seleccionados.length);
-                    console.log(numeroAleatorio1);
+                    //console.log(numeroAleatorio1);
                 }
                 let numeroAleatorio = Math.floor(Math.random() * seleccionados.length);
                 while (seleccionados[numeroAleatorio] == 'NULLS') {
                     numeroAleatorio = Math.floor(Math.random() * seleccionados.length);
-                    console.log(numeroAleatorio);
+                    //console.log(numeroAleatorio);
                 }
                 if (seleccionados[numeroAleatorio] == seleccionados[numeroAleatorio1]) {
-                    const seleccionados = [...new Set(seleccionados)];
+                    let seleccio = seleccionados.filter(valor => valor !== "NULL");
                     jaja = 0;
                     console.log("Repetido: " + seleccionados[numeroAleatorio])
-
+                    a = true
                     while (a == true) {
-                        console.log(seleccionados[numeroAleatorio] + "-" + seleccionados[jaja])
-                        if (seleccionados[jaja] == 'NULLS') {
+                        console.log(seleccio[numeroAleatorio] + "-" + seleccio[jaja])
+                        if (seleccio[jaja] == 'NULLS') {
                             jaja += 1
                         } else {
-                            if (seleccionados[numeroAleatorio] != seleccionados[jaja]) {
+                            if (seleccionados[numeroAleatorio] != seleccio[jaja]) {
                                 numeroAleatorio = jaja
+                                console.log(seleccionados)
+
                                 a = false;
                             }
                         }
@@ -214,7 +216,7 @@
                     newElement.classList.add('div');
                     newElement.classList.add('grupo'); // Agregado: agrega la clase "grupo"
                     newElement.id = 'page';
-                    newElement.innerHTML = `<h2>Grupo: ${seleccionados[numeroAleatorio]} Y ${seleccionados[numeroAleatorio1]}</h2>`;
+                    newElement.innerHTML = `<h2>Grupo: ${seleccio[numeroAleatorio]} Y ${seleccionados[numeroAleatorio1]}</h2>`;
                     document.querySelector('#orden').appendChild(newElement);
                     seleccionados[numeroAleatorio] = 'NULLS';
                     seleccionados[numeroAleatorio1] = 'NULLS';
