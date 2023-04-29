@@ -109,6 +109,7 @@
     <div id="orden">
     </div>
     <script>
+        a = true
         var lista = [
             'Agustin Bracamonte',
             'Axel Ariel Godoy',
@@ -189,13 +190,13 @@
                 }
                 if (seleccionados[numeroAleatorio] == seleccionados[numeroAleatorio1]) {
                     jaja = 0;
-                    while (true) {
+                    while (a == true) {
                         if (seleccionados[jaja] == 'NULLS') {
                             jaja += 1
                         } else {
                             if (seleccionados[numeroAleatorio] != seleccionados[jaja]) {
                                 seleccionados[numeroAleatorio] = seleccionados[jaja];
-                                break;
+                                a = false;
                             }
                         }
 
