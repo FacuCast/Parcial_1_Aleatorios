@@ -169,7 +169,12 @@
         function Aleatorios() {
             const seleccionados = obtenerSeleccionados();
 
-            document.getElementById('orden').innerHTML = '';
+            // Agregado: elimina los grupos anteriores
+            const gruposAnteriores = document.querySelectorAll('.grupo');
+            for (let i = 0; i < gruposAnteriores.length; i++) {
+                gruposAnteriores[i].remove();
+            }
+
             console.log(lista.length);
             for (let index = 0; index < (seleccionados.length / 2); index++) {
                 let numeroAleatorio1 = Math.floor(Math.random() * seleccionados.length);
@@ -198,6 +203,7 @@
 
                     const newElement = document.createElement('div');
                     newElement.classList.add('div');
+                    newElement.classList.add('grupo'); // Agregado: agrega la clase "grupo"
                     newElement.id = 'page';
                     newElement.innerHTML = `<h2>Grupo: ${seleccionados[numeroAleatorio]} Y ${seleccionados[numeroAleatorio1]}</h2>`;
                     document.querySelector('#orden').appendChild(newElement);
@@ -206,6 +212,7 @@
                 } else {
                     const newElement = document.createElement('div');
                     newElement.classList.add('div');
+                    newElement.classList.add('grupo'); // Agregado: agrega la clase "grupo"
                     newElement.id = 'page';
                     newElement.innerHTML = `<h2>Grupo: ${seleccionados[numeroAleatorio]} Y ${seleccionados[numeroAleatorio1]}</h2>`;
                     document.querySelector('#orden').appendChild(newElement);
