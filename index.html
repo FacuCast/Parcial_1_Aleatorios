@@ -14,6 +14,31 @@
             padding: 0;
             background-color: #f2f2f2;
         }
+
+        .boton-personalizado {
+            background-color: #4CAF50;
+            /* color de fondo */
+            color: white;
+            /* color de texto */
+            padding: 10px 20px;
+            /* padding horizontal y vertical */
+            border: none;
+            /* borde */
+            border-radius: 5px;
+            /* radio de los bordes */
+            cursor: pointer;
+            /* cursor al pasar por encima */
+            font-size: 16px;
+            /* tamaño de fuente */
+            transition: background-color 0.3s ease;
+            /* transición al pasar por encima */
+        }
+
+        .boton-personalizado:hover {
+            background-color: #3e8e41;
+            /* color de fondo al pasar por encima */
+        }
+
         h1 {
             text-align: center;
             margin-top: 20px;
@@ -21,6 +46,7 @@
             color: #2E2E2E;
             text-shadow: 2px 2px 5px #ccc;
         }
+
         /* Estilos para los grupos */
         #orden {
             display: flex;
@@ -29,6 +55,7 @@
             align-items: center;
             margin: 20px 0;
         }
+
         .div {
             background-color: #fff;
             border: 1px solid #ccc;
@@ -40,29 +67,35 @@
             text-align: center;
             transition: all 0.3s ease;
         }
+
         h2 {
             margin-top: 0;
             font-size: 24px;
             color: #2E2E2E;
             text-shadow: 2px 2px 5px #ccc;
         }
+
         /* Estilos para las animaciones */
         @keyframes fadeIn {
             0% {
                 opacity: 0;
                 transform: translateY(20px);
             }
+
             100% {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
+
         .div:nth-child(odd) {
             animation: fadeIn 0.5s ease;
         }
+
         .div:nth-child(even) {
             animation: fadeIn 0.5s ease 0.3s;
         }
+
         @media screen and (max-width: 768px) {
             .div {
                 width: 90%;
@@ -96,33 +129,90 @@
             'Rodolfo Lynch',
             'sanchez monzon juan ignacio',
             'Tomas Corazzini',
+            'Cristian Gustavo Carretero Argañaraz',
+            'De Carlos Gabriela',
             'Valdez Nicolas',
             'Valentin Pierluigi',
             'Vera Rodolfo Aníbal'
         ];
 
-
         document.getElementById('orden').innerHTML = '';
-        console.log(lista.length);
-        for (let index = 0; index < (lista.length / 2); index++) {
-            let numeroAleatorio1 = Math.floor(Math.random() * lista.length);
-            while (lista[numeroAleatorio1] == 'NULLS') {
-                numeroAleatorio1 = Math.floor(Math.random() * lista.length);
-                console.log(numeroAleatorio1);
-            }
-            let numeroAleatorio = Math.floor(Math.random() * lista.length);
-            while (lista[numeroAleatorio] == 'NULLS') {
-                numeroAleatorio = Math.floor(Math.random() * lista.length);
-                console.log(numeroAleatorio);
-            }
 
+        for (let index = 0; index < lista.length; index++) {
             const newElement = document.createElement('div');
             newElement.classList.add('div');
             newElement.id = 'page';
-            newElement.innerHTML = `<h2>Grupo ${index}: ${lista[numeroAleatorio]} Y ${lista[numeroAleatorio1]}</h2>`;
+            newElement.innerHTML = `<input type="checkbox" name="Alumnos" value="${lista[index]}" >
+            <label for="${lista[index]}">${lista[index]}</label>`;
             document.querySelector('#orden').appendChild(newElement);
-            lista[numeroAleatorio] = 'NULLS';
-            lista[numeroAleatorio1] = 'NULLS';
+        }
+
+        const buttonElement = document.createElement('button');
+        buttonElement.innerHTML = 'Aleatorios';
+        buttonElement.onclick = function () {
+            Aleatorios();
+        };
+        document.querySelector('#orden').appendChild(buttonElement);
+        buttonElement.style.backgroundColor = 'blue';
+        buttonElement.style.borderRadius = '5px';
+        buttonElement.classList.add('boton-personalizado');
+
+        function obtenerSeleccionados() {
+            const checkboxes = document.querySelectorAll('input[name="Alumnos"]:checked');
+            const seleccionados = [];
+            for (let i = 0; i < checkboxes.length; i++) {
+                seleccionados.push(checkboxes[i].value);
+            }
+            return seleccionados;
+        }
+
+        function Aleatorios() {
+            const seleccionados = obtenerSeleccionados();
+
+            document.getElementById('orden').innerHTML = '';
+            console.log(lista.length);
+            for (let index = 0; index < (seleccionados.length / 2); index++) {
+                let numeroAleatorio1 = Math.floor(Math.random() * seleccionados.length);
+                while (seleccionados[numeroAleatorio1] == 'NULLS') {
+                    numeroAleatorio1 = Math.floor(Math.random() * seleccionados.length);
+                    console.log(numeroAleatorio1);
+                }
+                let numeroAleatorio = Math.floor(Math.random() * seleccionados.length);
+                while (seleccionados[numeroAleatorio] == 'NULLS') {
+                    numeroAleatorio = Math.floor(Math.random() * seleccionados.length);
+                    console.log(numeroAleatorio);
+                }
+                if (seleccionados[numeroAleatorio] == seleccionados[numeroAleatorio1]) {
+                    jaja = 0;
+                    while (true) {
+                        if (seleccionados[jaja] == 'NULLS') {
+                            jaja += 1
+                        } else {
+                            if (seleccionados[numeroAleatorio] != seleccionados[jaja]) {
+                                seleccionados[numeroAleatorio] = seleccionados[jaja];
+                                break;
+                            }
+                        }
+
+                    }
+
+                    const newElement = document.createElement('div');
+                    newElement.classList.add('div');
+                    newElement.id = 'page';
+                    newElement.innerHTML = `<h2>Grupo: ${seleccionados[numeroAleatorio]} Y ${seleccionados[numeroAleatorio1]}</h2>`;
+                    document.querySelector('#orden').appendChild(newElement);
+                    seleccionados[numeroAleatorio] = 'NULLS';
+                    seleccionados[numeroAleatorio1] = 'NULLS';
+                } else {
+                    const newElement = document.createElement('div');
+                    newElement.classList.add('div');
+                    newElement.id = 'page';
+                    newElement.innerHTML = `<h2>Grupo: ${seleccionados[numeroAleatorio]} Y ${seleccionados[numeroAleatorio1]}</h2>`;
+                    document.querySelector('#orden').appendChild(newElement);
+                    seleccionados[numeroAleatorio] = 'NULLS';
+                    seleccionados[numeroAleatorio1] = 'NULLS';
+                }
+            }
         }
     </script>
 </body>
